@@ -7,26 +7,9 @@
 Example:
 ```
 module "centralized_router" {
-  source = "git@github.com:JudeQuintana/terraform-modules.git//networking/transit_gateway_centralized_router_for_tiered_vpc_ng?ref=v1.4.9"
-
-  env_prefix       = var.env_prefix
-  region_az_labels = var.region_az_labels
-  centralized_router = {
-    name            = "bishop"
-    amazon_side_asn = 64512
-    blackhole_cidrs = ["172.16.8.0/24"]
-    vpcs            = module.vpcs
-  }
-}
+  source  = "JudeQuintana/centralized_router/aws"
+  version = "1.0.0"
 ```
-
-# Networking Trifecta Demo
-Blog Post:
-[Terraform Networking Trifecta ](https://jq1.io/posts/tnt/)
-
-Main:
-- [Networking Trifecta Demo](https://github.com/JudeQuintana/terraform-main/tree/main/networking_trifecta_demo)
-- See [Trifecta Demo Time](https://jq1.io/posts/tnt/#trifecta-demo-time) for instructions.
 
 ## Requirements
 

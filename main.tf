@@ -8,7 +8,9 @@
 * Example:
 * ```
 * module "centralized_router" {
-*   source = "git@github.com:JudeQuintana/terraform-modules.git//networking/transit_gateway_centralized_router_for_tiered_vpc_ng?ref=v1.4.9"
+*   source  = "JudeQuintana/centralized_router/aws"
+*   version = "1.0.0"
+}
 *
 *   env_prefix       = var.env_prefix
 *   region_az_labels = var.region_az_labels
