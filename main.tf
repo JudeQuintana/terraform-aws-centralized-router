@@ -10,7 +10,6 @@
 * module "centralized_router" {
 *   source  = "JudeQuintana/centralized_router/aws"
 *   version = "1.0.0"
-}
 *
 *   env_prefix       = var.env_prefix
 *   region_az_labels = var.region_az_labels
