@@ -66,8 +66,8 @@ module "centralized_router" {
 
 `v1.0.1`
 - Now supports VPC attachments for private subnets.
-  - Uses the subnet id for a subnet tagged with `special = true` from either a private or a public subnet per AZ in Tiered VPC-NG for `v1.8.1`
-  - Will continue work with Super Router, Full Mesh Trio and Mega Mesh at `v1.8.0`.
+  - Uses the subnet id for a subnet tagged with `special = true` from either a private or a public subnet per AZ in Tiered VPC-NG for `v1.0.1`
+  - Will continue work with Super Router, Full Mesh Trio and Mega Mesh at `v1.0.0`.
 
 `v1.0.1` Example (same as before but with source change):
 ```
