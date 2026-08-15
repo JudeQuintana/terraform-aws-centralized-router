@@ -1,6 +1,16 @@
 /*
 * # Transit Gateway Centralized Router
-* - Creates hub and spoke topology from VPCs.
+*
+* Regional hub-and-spoke topology for Tiered VPC-NG. A single TGW with one shared
+* route table connects all VPC attachments, then compiles an optional routing policy
+* (deny > allow > segments > default) into per-VPC route table entries. Operates as
+* the Regional IR, the smallest policy evaluation scope.
+*
+* `v1.1.0`
+* - Routing policy language integration.
+* - New `routing_policy` variable with four primitives and fixed precedence: deny > allow > segments > default.
+* - Dual-stack support: one policy declaration controls both IPv4 and IPv6 route generation.
+* - Uses `generate_routes_to_other_vpcs` v1.1.0 as the shared scope-agnostic compilation unit.
 *
 * `v1.0.6`
 * - remove legacy output `vpc.routes`. will rebuild super router at a later time but no need to keep this around.
@@ -35,11 +45,10 @@
 * - Supports auto routing IPv4 secondary cidrs and IPv6 cidrs in addtion to IPv4 network cidrs
 *   - Can blackhole IPv6 cidrs
 *
-* `v1.0.2` example:
+* `v1.0.1` example:
 * ```
 * module "centralized_router" {
-*   source  = "JudeQuintana/centralized-router/aws"
-*   version = "1.0.2"
+*   source = "git@github.com:JudeQuintana/terraform-modules.git//networking/transit_gateway_centralized_router_for_tiered_vpc_ng?ref=v1.8.2"
 *
 *   env_prefix       = var.env_prefix
 *   region_az_labels = var.region_az_labels
@@ -55,16 +64,15 @@
 * }
 * ```
 *
-* `v1.0.1`
+* `v1.8.1`
 * - Now supports VPC attachments for private subnets.
-*   - Uses the subnet id for a subnet tagged with `special = true` from either a private or a public subnet per AZ in Tiered VPC-NG for `v1.0.1`
-*   - Will continue work with Super Router, Full Mesh Trio and Mega Mesh at `v1.0.0`.
+*   - Uses the subnet id for a subnet tagged with `special = true` from either a private or a public subnet per AZ in Tiered VPC-NG for `v1.8.1`
+*   - Will continue work with Super Router, Full Mesh Trio and Mega Mesh at `v1.8.0`.
 *
-* `v1.0.1` Example (same as before but with source change):
+* `v1.8.1` Example (same as before but with source change):
 * ```
 * module "centralized_router" {
-*   source  = "JudeQuintana/centralized-router/aws"
-*   version = "1.0.1"
+*   source = "git@github.com:JudeQuintana/terraform-modules.git//networking/transit_gateway_centralized_router_for_tiered_vpc_ng?ref=v1.8.1"
 *
 *   env_prefix       = var.env_prefix
 *   region_az_labels = var.region_az_labels
@@ -77,18 +85,17 @@
 * }
 * ```
 *
-* `v1.0.0`
+* `v1.8.0`
 * - This Transit Gateway Centralized Router module will create a hub spoke and topology from existing Tiered VPCs.
 * - Will use the special public subnet in each AZ when a Tiered VPC is passed to it.
 * - All attachments will be associated and routes propagated to one TGW Route Table.
 * - Each Tiered VPC will have all their route tables updated in each VPC with a route to all other VPC networks via the TGW.
 * - Will generate and add routes in each VPC to all other networks.
 *
-* `v1.0.0` Example:
+* `v1.8.0` Example:
 * ```
 * module "centralized_router" {
-*   source  = "JudeQuintana/centralized-router/aws"
-*   version = "1.0.0"
+*   source = "git@github.com:JudeQuintana/terraform-modules.git//networking/transit_gateway_centralized_router_for_tiered_vpc_ng?ref=v1.8.0"
 *
 *   env_prefix       = var.env_prefix
 *   region_az_labels = var.region_az_labels
