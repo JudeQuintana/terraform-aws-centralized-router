@@ -1,10 +1,14 @@
 # Create routes to other VPC network_cidrs in private and public route tables for each VPC
 module "this_generate_routes_to_other_vpcs" {
   source  = "JudeQuintana/generate-routes-to-other-vpcs/aws"
-  version = "1.1.0"
+  version = "1.2.0"
 
-  routing_policy = var.routing_policy
-  vpcs           = local.vpcs
+  generate_routes_to_other_vpcs = {
+    routing_policy            = var.centralized_router.routing_policy
+    vpcs                      = local.vpcs
+    previous_reachability     = var.centralized_router.inspect.policy_diff.previous_reachability
+    equivalent_routing_policy = var.centralized_router.inspect.equivalence.equivalent_routing_policy
+  }
 }
 
 locals {
