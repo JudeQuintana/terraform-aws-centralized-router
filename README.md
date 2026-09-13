@@ -160,7 +160,7 @@ Main:
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
-| <a name="module_this_generate_routes_to_other_vpcs"></a> [this\_generate\_routes\_to\_other\_vpcs](#module\_this\_generate\_routes\_to\_other\_vpcs) | ../generate_routes_to_other_vpcs | n/a |
+| <a name="module_this_generate_routes_to_other_vpcs"></a> [this\_generate\_routes\_to\_other\_vpcs](#module\_this\_generate\_routes\_to\_other\_vpcs) | git@github.com:JudeQuintana/terraform-aws-generate-routes-to-other-vpcs.git | semantic-toolchain-fixes-and-updates |
 
 ## Resources
 
